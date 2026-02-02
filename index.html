@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sunrise Spices - Celebrating Regional Flavours</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <!-- Header / Navigation -->
+    <header class="header" id="header">
+        <div class="container">
+            <div class="header-content">
+                <!-- Logo -->
+                <div class="logo">
+                    <span class="logo-icon">🌶️</span>
+                    <span class="logo-text">Sunrise <span>Spices</span></span>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <nav class="nav-desktop">
+                    <a href="#range" class="nav-link">Our Range</a>
+                    <a href="#recipes" class="nav-link">Recipes</a>
+                    <a href="#about" class="nav-link">About Us</a>
+                    <a href="#contact" class="nav-link">Contact</a>
+                </nav>
+                
+                <!-- Search Bar -->
+                <div class="search-bar">
+                    <input type="text" placeholder="Search spices..." aria-label="Search">
+                    <button type="button" aria-label="Search button">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <circle cx="9" cy="9" r="6" stroke="currentColor" stroke-width="2"/>
+                            <path d="M14 14L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </button>
+                </div>
+                
+                <!-- Mobile Menu Toggle -->
+                <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Navigation -->
+        <nav class="nav-mobile" id="navMobile">
+            <a href="#range" class="nav-link">Our Range</a>
+            <a href="#recipes" class="nav-link">Recipes</a>
+            <a href="#about" class="nav-link">About Us</a>
+            <a href="#contact" class="nav-link">Contact</a>
+        </nav>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-background"></div>
+        <div class="container">
+            <div class="hero-content">
+                <span class="hero-label">Authentic • Traditional • Pure</span>
+                <h1 class="hero-title">Celebrating Regional Flavours</h1>
+                <p class="hero-description">
+                    Experience the rich heritage of India's finest spices, sourced directly from farms 
+                    and crafted with generations of expertise
+                </p>
+                <button class="btn btn-primary">Shop Now</button>
+            </div>
+        </div>
+        <div class="hero-ornament"></div>
+    </section>
+    
+    <!-- Product Range Section -->
+    <section class="section product-range" id="range">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Our Range</h2>
+                <p class="section-subtitle">Handpicked spices that define authentic Indian cuisine</p>
+            </div>
+            
+            <div class="product-carousel">
+                <!-- Product Card 1 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://placehold.co/300x300/FBBA00/FFFFFF?text=Turmeric" alt="Turmeric Powder">
+                        <div class="product-badge">Premium</div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Turmeric Powder</h3>
+                        <p class="product-weight">100g • 200g • 500g</p>
+                        <p class="product-description">Golden, aromatic turmeric from select farms</p>
+                        <button class="btn btn-secondary">View Details</button>
+                    </div>
+                </div>
+                
+                <!-- Product Card 2 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://placehold.co/300x300/6A2F27/FFFFFF?text=Garam+Masala" alt="Garam Masala">
+                        <div class="product-badge">Best Seller</div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Garam Masala</h3>
+                        <p class="product-weight">50g • 100g • 250g</p>
+                        <p class="product-description">Traditional blend of warming spices</p>
+                        <button class="btn btn-secondary">View Details</button>
+                    </div>
+                </div>
+                
+                <!-- Product Card 3 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://placehold.co/300x300/A20710/FFFFFF?text=Red+Chilli" alt="Red Chilli Powder">
+                        <div class="product-badge">Hot</div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Red Chilli Powder</h3>
+                        <p class="product-weight">100g • 250g • 500g</p>
+                        <p class="product-description">Fiery red chillies with intense heat</p>
+                        <button class="btn btn-secondary">View Details</button>
+                    </div>
+                </div>
+                
+                <!-- Product Card 4 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://placehold.co/300x300/89AC5C/FFFFFF?text=Coriander" alt="Coriander Powder">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Coriander Powder</h3>
+                        <p class="product-weight">100g • 200g • 500g</p>
+                        <p class="product-description">Fresh, citrusy coriander seeds ground to perfection</p>
+                        <button class="btn btn-secondary">View Details</button>
+                    </div>
+                </div>
+                
+                <!-- Product Card 5 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://placehold.co/300x300/6A2F27/FFFFFF?text=Cumin+Seeds" alt="Cumin Seeds">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Cumin Seeds</h3>
+                        <p class="product-weight">50g • 100g • 200g</p>
+                        <p class="product-description">Earthy, aromatic cumin for tempering</p>
+                        <button class="btn btn-secondary">View Details</button>
+                    </div>
+                </div>
+                
+                <!-- Product Card 6 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://placehold.co/300x300/FBBA00/333333?text=Curry+Powder" alt="Curry Powder">
+                        <div class="product-badge">New</div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Curry Powder</h3>
+                        <p class="product-weight">100g • 250g</p>
+                        <p class="product-description">Rich, complex blend for authentic curries</p>
+                        <button class="btn btn-secondary">View Details</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Recipe Section -->
+    <section class="section recipes-section" id="recipes">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Authentic Recipes</h2>
+                <p class="section-subtitle">Discover traditional dishes passed down through generations</p>
+            </div>
+            
+            <!-- Filter Buttons -->
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">All Recipes</button>
+                <button class="filter-btn" data-filter="breakfast">Breakfast</button>
+                <button class="filter-btn" data-filter="lunch">Lunch</button>
+                <button class="filter-btn" data-filter="dinner">Dinner</button>
+                <button class="filter-btn" data-filter="snacks">Snacks</button>
+            </div>
+            
+            <!-- Recipe Grid -->
+            <div class="recipe-grid">
+                <!-- Recipe Card 1 -->
+                <article class="recipe-card" data-category="breakfast">
+                    <div class="recipe-image">
+                        <img src="https://placehold.co/300x300/FBBA00/333333?text=Masala+Dosa" alt="Masala Dosa">
+                    </div>
+                    <div class="recipe-content">
+                        <span class="recipe-category">Breakfast</span>
+                        <h3 class="recipe-title">Masala Dosa</h3>
+                        <p class="recipe-description">Crispy rice crepe filled with spiced potato filling</p>
+                        <div class="recipe-meta">
+                            <span>⏱️ 45 min</span>
+                            <span>🌶️ Medium</span>
+                        </div>
+                    </div>
+                </article>
+                
+                <!-- Recipe Card 2 -->
+                <article class="recipe-card" data-category="lunch">
+                    <div class="recipe-image">
+                        <img src="https://placehold.co/300x300/A20710/FFFFFF?text=Butter+Chicken" alt="Butter Chicken">
+                    </div>
+                    <div class="recipe-content">
+                        <span class="recipe-category">Lunch</span>
+                        <h3 class="recipe-title">Butter Chicken</h3>
+                        <p class="recipe-description">Creamy tomato-based curry with tender chicken</p>
+                        <div class="recipe-meta">
+                            <span>⏱️ 60 min</span>
+                            <span>🌶️ Mild</span>
+                        </div>
+                    </div>
+                </article>
+                
+                <!-- Recipe Card 3 -->
+                <article class="recipe-card" data-category="dinner">
+                    <div class="recipe-image">
+                        <img src="https://placehold.co/300x300/6A2F27/FFFFFF?text=Biryani" alt="Biryani">
+                    </div>
+                    <div class="recipe-content">
+                        <span class="recipe-category">Dinner</span>
+                        <h3 class="recipe-title">Hyderabadi Biryani</h3>
+                        <p class="recipe-description">Aromatic basmati rice layered with marinated meat</p>
+                        <div class="recipe-meta">
+                            <span>⏱️ 90 min</span>
+                            <span>🌶️ Hot</span>
+                        </div>
+                    </div>
+                </article>
+                
+                <!-- Recipe Card 4 -->
+                <article class="recipe-card" data-category="snacks">
+                    <div class="recipe-image">
+                        <img src="https://placehold.co/300x300/89AC5C/FFFFFF?text=Samosa" alt="Samosa">
+                    </div>
+                    <div class="recipe-content">
+                        <span class="recipe-category">Snacks</span>
+                        <h3 class="recipe-title">Crispy Samosas</h3>
+                        <p class="recipe-description">Deep-fried pastries with savory potato filling</p>
+                        <div class="recipe-meta">
+                            <span>⏱️ 40 min</span>
+                            <span>🌶️ Medium</span>
+                        </div>
+                    </div>
+                </article>
+                
+                <!-- Recipe Card 5 -->
+                <article class="recipe-card" data-category="lunch">
+                    <div class="recipe-image">
+                        <img src="https://placehold.co/300x300/FBBA00/333333?text=Dal+Tadka" alt="Dal Tadka">
+                    </div>
+                    <div class="recipe-content">
+                        <span class="recipe-category">Lunch</span>
+                        <h3 class="recipe-title">Dal Tadka</h3>
+                        <p class="recipe-description">Yellow lentils tempered with aromatic spices</p>
+                        <div class="recipe-meta">
+                            <span>⏱️ 35 min</span>
+                            <span>🌶️ Mild</span>
+                        </div>
+                    </div>
+                </article>
+                
+                <!-- Recipe Card 6 -->
+                <article class="recipe-card" data-category="breakfast">
+                    <div class="recipe-image">
+                        <img src="https://placehold.co/300x300/A20710/FFFFFF?text=Poha" alt="Poha">
+                    </div>
+                    <div class="recipe-content">
+                        <span class="recipe-category">Breakfast</span>
+                        <h3 class="recipe-title">Maharashtrian Poha</h3>
+                        <p class="recipe-description">Flattened rice cooked with peanuts and spices</p>
+                        <div class="recipe-meta">
+                            <span>⏱️ 20 min</span>
+                            <span>🌶️ Mild</span>
+                        </div>
+                    </div>
+                </article>
+                
+                <!-- Recipe Card 7 -->
+                <article class="recipe-card" data-category="dinner">
+                    <div class="recipe-image">
+                        <img src="https://placehold.co/300x300/6A2F27/FFFFFF?text=Rogan+Josh" alt="Rogan Josh">
+                    </div>
+                    <div class="recipe-content">
+                        <span class="recipe-category">Dinner</span>
+                        <h3 class="recipe-title">Rogan Josh</h3>
+                        <p class="recipe-description">Kashmiri lamb curry with aromatic spices</p>
+                        <div class="recipe-meta">
+                            <span>⏱️ 75 min</span>
+                            <span>🌶️ Hot</span>
+                        </div>
+                    </div>
+                </article>
+                
+                <!-- Recipe Card 8 -->
+                <article class="recipe-card" data-category="snacks">
+                    <div class="recipe-image">
+                        <img src="https://placehold.co/300x300/89AC5C/FFFFFF?text=Pakora" alt="Pakora">
+                    </div>
+                    <div class="recipe-content">
+                        <span class="recipe-category">Snacks</span>
+                        <h3 class="recipe-title">Vegetable Pakoras</h3>
+                        <p class="recipe-description">Crispy fritters made with mixed vegetables</p>
+                        <div class="recipe-meta">
+                            <span>⏱️ 25 min</span>
+                            <span>🌶️ Medium</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+    
+    <!-- About Section -->
+    <section class="section about-section" id="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2 class="section-title">Our Heritage</h2>
+                    <p>For over three generations, Sunrise Spices has been India's trusted name in authentic, premium spices. We source directly from farmers across the country, ensuring the highest quality and supporting local communities.</p>
+                    <p>Our commitment to purity means no artificial colors, no additives, and no compromises. Every blend is crafted using traditional methods passed down through generations.</p>
+                    <div class="about-stats">
+                        <div class="stat">
+                            <div class="stat-number">50+</div>
+                            <div class="stat-label">Years of Excellence</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">100%</div>
+                            <div class="stat-label">Pure & Natural</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">500+</div>
+                            <div class="stat-label">Farming Partners</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <img src="https://placehold.co/600x400/A20710/FFFFFF?text=Heritage+%26+Quality" alt="Sunrise Spices Heritage">
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="container">
+            <div class="footer-grid">
+                <!-- Company Info -->
+                <div class="footer-column">
+                    <div class="footer-logo">
+                        <span class="logo-icon">🌶️</span>
+                        <span class="logo-text">Sunrise <span>Spices</span></span>
+                    </div>
+                    <p class="footer-description">Bringing authentic Indian flavours to your kitchen since 1975</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                            </svg>
+                        </a>
+                        <a href="#" aria-label="Instagram">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                            </svg>
+                        </a>
+                        <a href="#" aria-label="Twitter">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div class="footer-column">
+                    <h3 class="footer-title">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#range">Our Products</a></li>
+                        <li><a href="#recipes">Recipes</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#">Store Locator</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Customer Care -->
+                <div class="footer-column">
+                    <h3 class="footer-title">Customer Care</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Shipping Information</a></li>
+                        <li><a href="#">Returns & Exchanges</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Newsletter -->
+                <div class="footer-column">
+                    <h3 class="footer-title">Stay Connected</h3>
+                    <p class="newsletter-text">Subscribe to receive recipes, special offers, and spice tips</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Your email address" aria-label="Email address" required>
+                        <button type="submit" class="btn btn-primary">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 Sunrise Spices. All rights reserved. Crafted with love and authentic spices.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
