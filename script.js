@@ -1,1030 +1,365 @@
 /* ==========================================
-   CSS Reset & Base Styles
+   Sunrise Spices - JavaScript Functionality
    ========================================== */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
 
-:root {
-    /* Color Palette - Sunrise Spices */
-    --primary: #A20710;         /* Deep Red/Chilli */
-    --secondary: #FBBA00;       /* Turmeric Yellow */
-    --accent-brown: #6A2F27;    /* Cumin Brown */
-    --accent-green: #89AC5C;    /* Coriander Green */
-    --bg-white: #FFFFFF;
-    --bg-beige: #FFF8F0;
-    --text-dark: #2D2D2D;
-    --text-gray: #666666;
-    --text-light: #999999;
+// Wait for DOM to be fully loaded
+document.addEventListener('DOMContentLoaded', function() {
     
-    /* Typography */
-    --font-display: 'Playfair Display', serif;
-    --font-body: 'Inter', sans-serif;
+    /* ==========================================
+       Mobile Menu Toggle
+       ========================================== */
+    const mobileToggle = document.getElementById('mobileToggle');
+    const navMobile = document.getElementById('navMobile');
+    const navLinks = document.querySelectorAll('.nav-mobile .nav-link');
     
-    /* Spacing */
-    --spacing-xs: 0.5rem;
-    --spacing-sm: 1rem;
-    --spacing-md: 2rem;
-    --spacing-lg: 4rem;
-    --spacing-xl: 6rem;
+    // Toggle mobile menu open/close
+    mobileToggle.addEventListener('click', function() {
+        this.classList.toggle('active');
+        navMobile.classList.toggle('active');
+        
+        // Prevent body scroll when menu is open
+        document.body.style.overflow = navMobile.classList.contains('active') ? 'hidden' : '';
+    });
     
-    /* Border Radius */
-    --radius-sm: 4px;
-    --radius-md: 8px;
-    --radius-lg: 16px;
+    // Close mobile menu when a nav link is clicked
+    navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            mobileToggle.classList.remove('active');
+            navMobile.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+    });
     
-    /* Shadows */
-    --shadow-sm: 0 2px 8px rgba(162, 7, 16, 0.1);
-    --shadow-md: 0 4px 16px rgba(162, 7, 16, 0.15);
-    --shadow-lg: 0 8px 32px rgba(162, 7, 16, 0.2);
     
-    /* Transitions */
-    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
+    /* ==========================================
+       Sticky Navbar with Scroll Effect
+       ========================================== */
+    const header = document.getElementById('header');
+    let lastScrollTop = 0;
+    
+    window.addEventListener('scroll', function() {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        // Add 'scrolled' class when user scrolls down 50px
+        if (scrollTop > 50) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+        
+        lastScrollTop = scrollTop;
+    });
+    
+    
+    /* ==========================================
+       Recipe Filtering Functionality
+       ========================================== */
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const recipeCards = document.querySelectorAll('.recipe-card');
+    
+    // Add click event to each filter button
+    filterButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const filterValue = this.getAttribute('data-filter');
+            
+            // Remove active class from all buttons
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            
+            // Add active class to clicked button
+            this.classList.add('active');
+            
+            // Filter recipe cards with smooth animation
+            recipeCards.forEach((card, index) => {
+                const category = card.getAttribute('data-category');
+                
+                // Add slight delay for staggered animation effect
+                setTimeout(() => {
+                    if (filterValue === 'all' || category === filterValue) {
+                        card.classList.remove('hidden');
+                        card.style.animation = 'fadeIn 0.5s ease-out';
+                    } else {
+                        card.classList.add('hidden');
+                    }
+                }, index * 50);
+            });
+        });
+    });
+    
+    
+    /* ==========================================
+       Search Bar Functionality
+       ========================================== */
+    const searchInput = document.querySelector('.search-bar input');
+    const searchButton = document.querySelector('.search-bar button');
+    
+    // Handle search on button click
+    if (searchButton) {
+        searchButton.addEventListener('click', function() {
+            performSearch();
+        });
+    }
+    
+    // Handle search on Enter key press
+    if (searchInput) {
+        searchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                performSearch();
+            }
+        });
+    }
+    
+    function performSearch() {
+        const searchTerm = searchInput.value.trim().toLowerCase();
+        
+        if (searchTerm) {
+            // This is a placeholder - in a real implementation, this would
+            // filter products or navigate to a search results page
+            console.log('Searching for:', searchTerm);
+            alert(`Searching for: "${searchTerm}"\n\nThis is a demo. In production, this would show search results.`);
+            
+            // Clear search input
+            searchInput.value = '';
+        }
+    }
+    
+    
+    /* ==========================================
+       Newsletter Form Submission
+       ========================================== */
+    const newsletterForm = document.querySelector('.newsletter-form');
+    
+    if (newsletterForm) {
+        newsletterForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const emailInput = this.querySelector('input[type="email"]');
+            const email = emailInput.value.trim();
+            
+            if (email) {
+                // This is a placeholder - in a real implementation, this would
+                // send the email to a backend service
+                alert(`Thank you for subscribing!\n\nWe'll send recipes and offers to: ${email}`);
+                
+                // Clear form
+                emailInput.value = '';
+            }
+        });
+    }
+    
+    
+    /* ==========================================
+       Smooth Scroll for Navigation Links
+       ========================================== */
+    const allNavLinks = document.querySelectorAll('a[href^="#"]');
+    
+    allNavLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            
+            // Only handle links that point to elements on the page
+            if (href !== '#' && href.length > 1) {
+                e.preventDefault();
+                
+                const targetId = href.substring(1);
+                const targetElement = document.getElementById(targetId);
+                
+                if (targetElement) {
+                    // Smooth scroll to target
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            }
+        });
+    });
+    
+    
+    /* ==========================================
+       Product Card Hover Animation
+       ========================================== */
+    const productCards = document.querySelectorAll('.product-card');
+    
+    productCards.forEach(card => {
+        // Add subtle parallax effect on mouse move
+        card.addEventListener('mousemove', function(e) {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            const deltaX = (x - centerX) / centerX;
+            const deltaY = (y - centerY) / centerY;
+            
+            const image = card.querySelector('.product-image img');
+            if (image) {
+                image.style.transform = `scale(1.05) translate(${deltaX * 5}px, ${deltaY * 5}px)`;
+            }
+        });
+        
+        // Reset on mouse leave
+        card.addEventListener('mouseleave', function() {
+            const image = card.querySelector('.product-image img');
+            if (image) {
+                image.style.transform = 'scale(1)';
+            }
+        });
+    });
+    
+    
+    /* ==========================================
+       "View Details" Button Functionality
+       ========================================== */
+    const viewDetailsButtons = document.querySelectorAll('.product-card .btn-secondary');
+    
+    viewDetailsButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const productCard = this.closest('.product-card');
+            const productTitle = productCard.querySelector('.product-title').textContent;
+            
+            // This is a placeholder - in a real implementation, this would
+            // navigate to a product detail page or open a modal
+            alert(`View Details\n\nProduct: ${productTitle}\n\nThis would open a detailed product page.`);
+        });
+    });
+    
+    
+    /* ==========================================
+       Scroll Animation Observer
+       ========================================== */
+    // Add fade-in animation to elements as they come into view
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('fade-in');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+    
+    // Observe product cards and recipe cards
+    const animatedElements = document.querySelectorAll('.product-card, .recipe-card, .stat');
+    animatedElements.forEach(element => {
+        observer.observe(element);
+    });
+    
+    
+    /* ==========================================
+       Shop Now Button Functionality
+       ========================================== */
+    const shopNowButton = document.querySelector('.hero .btn-primary');
+    
+    if (shopNowButton) {
+        shopNowButton.addEventListener('click', function() {
+            // Scroll to products section
+            const productsSection = document.getElementById('range');
+            if (productsSection) {
+                productsSection.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    }
+    
+    
+    /* ==========================================
+       Initialize Animations
+       ========================================== */
+    // Add entrance animations to hero content
+    setTimeout(() => {
+        const heroElements = document.querySelectorAll('.hero-label, .hero-title, .hero-description, .hero .btn-primary');
+        heroElements.forEach((element, index) => {
+            element.style.opacity = '1';
+        });
+    }, 100);
+    
+    
+    /* ==========================================
+       Order Options Click Tracking
+       ========================================== */
+    const orderButtons = document.querySelectorAll('.order-card .btn-primary');
+    
+    orderButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            const orderCard = this.closest('.order-card');
+            const orderTitle = orderCard.querySelector('.order-title').textContent;
+            
+            // Add a subtle animation when clicked
+            orderCard.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                orderCard.style.transform = '';
+            }, 200);
+            
+            // Log the order method (for analytics)
+            console.log(`Order initiated via: ${orderTitle}`);
+        });
+    });
+    
+    // Add hover effect to contact items
+    const contactItems = document.querySelectorAll('.contact-item a');
+    
+    contactItems.forEach(link => {
+        link.addEventListener('mouseenter', function() {
+            const svg = this.closest('.contact-item').querySelector('svg');
+            if (svg) {
+                svg.style.transform = 'scale(1.2)';
+                svg.style.transition = 'transform 0.3s ease';
+            }
+        });
+        
+        link.addEventListener('mouseleave', function() {
+            const svg = this.closest('.contact-item').querySelector('svg');
+            if (svg) {
+                svg.style.transform = 'scale(1)';
+            }
+        });
+    });
+    
+    
+    /* ==========================================
+       Console Welcome Message
+       ========================================== */
+    console.log('%c🌶️ Welcome to Sunrise Spices! ', 'background: #A20710; color: #FFFFFF; font-size: 16px; padding: 10px; border-radius: 5px;');
+    console.log('%cCelebrating Regional Flavours since 1975', 'color: #FBBA00; font-size: 12px;');
+    
+});
 
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    font-family: var(--font-body);
-    color: var(--text-dark);
-    line-height: 1.6;
-    background-color: var(--bg-white);
-    overflow-x: hidden;
-}
 
 /* ==========================================
-   Typography
+   Utility Functions
    ========================================== */
-h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-display);
-    font-weight: 700;
-    line-height: 1.2;
-}
-
-/* ==========================================
-   Utility Classes
-   ========================================== */
-.container {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 0 var(--spacing-sm);
-}
-
-.section {
-    padding: var(--spacing-xl) 0;
-}
-
-.section-header {
-    text-align: center;
-    margin-bottom: var(--spacing-lg);
-}
-
-.section-title {
-    font-size: clamp(2rem, 4vw, 3.5rem);
-    color: var(--primary);
-    margin-bottom: var(--spacing-sm);
-    position: relative;
-    display: inline-block;
-}
-
-.section-title::after {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80px;
-    height: 3px;
-    background: linear-gradient(90deg, var(--secondary) 0%, var(--primary) 100%);
-}
-
-.section-subtitle {
-    font-size: 1.125rem;
-    color: var(--text-gray);
-    max-width: 600px;
-    margin: var(--spacing-md) auto 0;
-}
-
-/* ==========================================
-   Buttons
-   ========================================== */
-.btn {
-    display: inline-block;
-    padding: 0.875rem 2rem;
-    font-family: var(--font-body);
-    font-size: 1rem;
-    font-weight: 600;
-    text-decoration: none;
-    border: none;
-    border-radius: var(--radius-md);
-    cursor: pointer;
-    transition: var(--transition);
-    text-align: center;
-}
-
-.btn-primary {
-    background: var(--primary);
-    color: var(--bg-white);
-    box-shadow: var(--shadow-md);
-}
-
-.btn-primary:hover {
-    background: #8A0610;
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
-}
-
-.btn-secondary {
-    background: transparent;
-    color: var(--primary);
-    border: 2px solid var(--primary);
-}
-
-.btn-secondary:hover {
-    background: var(--primary);
-    color: var(--bg-white);
-}
-
-/* ==========================================
-   Header / Navigation
-   ========================================== */
-.header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-    background: var(--bg-white);
-    transition: var(--transition);
-    border-bottom: 1px solid transparent;
-}
-
-.header.scrolled {
-    background: rgba(255, 255, 255, 0.98);
-    backdrop-filter: blur(10px);
-    box-shadow: var(--shadow-sm);
-    border-bottom-color: rgba(162, 7, 16, 0.1);
-}
-
-.header-content {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: var(--spacing-sm) 0;
-    gap: var(--spacing-md);
-}
-
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-family: var(--font-display);
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--primary);
-    text-decoration: none;
-}
-
-.logo-icon {
-    font-size: 2rem;
-    animation: rotate 3s ease-in-out infinite;
-}
-
-@keyframes rotate {
-    0%, 100% { transform: rotate(0deg); }
-    50% { transform: rotate(15deg); }
-}
-
-.logo-text span {
-    color: var(--secondary);
-}
-
-.nav-desktop {
-    display: none;
-    gap: var(--spacing-md);
-}
-
-.nav-link {
-    font-weight: 500;
-    color: var(--text-dark);
-    text-decoration: none;
-    position: relative;
-    padding: 0.5rem 0;
-    transition: var(--transition);
-}
-
-.nav-link::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: var(--primary);
-    transition: var(--transition);
-}
-
-.nav-link:hover {
-    color: var(--primary);
-}
-
-.nav-link:hover::after {
-    width: 100%;
-}
-
-.search-bar {
-    display: none;
-    align-items: center;
-    background: var(--bg-beige);
-    border-radius: var(--radius-md);
-    padding: 0.5rem 1rem;
-    gap: 0.5rem;
-    min-width: 200px;
-}
-
-.search-bar input {
-    flex: 1;
-    border: none;
-    background: transparent;
-    outline: none;
-    font-family: var(--font-body);
-    font-size: 0.9rem;
-    color: var(--text-dark);
-}
-
-.search-bar input::placeholder {
-    color: var(--text-light);
-}
-
-.search-bar button {
-    background: transparent;
-    border: none;
-    color: var(--primary);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    padding: 0;
-}
-
-.mobile-toggle {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 0.5rem;
-}
-
-.mobile-toggle span {
-    width: 25px;
-    height: 3px;
-    background: var(--primary);
-    border-radius: 2px;
-    transition: var(--transition);
-}
-
-.mobile-toggle.active span:nth-child(1) {
-    transform: rotate(45deg) translate(8px, 8px);
-}
-
-.mobile-toggle.active span:nth-child(2) {
-    opacity: 0;
-}
-
-.mobile-toggle.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(7px, -7px);
-}
-
-.nav-mobile {
-    display: none;
-    flex-direction: column;
-    background: var(--bg-white);
-    border-top: 1px solid rgba(162, 7, 16, 0.1);
-    padding: var(--spacing-sm) 0;
-}
-
-.nav-mobile.active {
-    display: flex;
-}
-
-.nav-mobile .nav-link {
-    padding: var(--spacing-sm) var(--spacing-sm);
-    border-left: 3px solid transparent;
-}
-
-.nav-mobile .nav-link:hover {
-    background: var(--bg-beige);
-    border-left-color: var(--primary);
-}
-
-/* ==========================================
-   Hero Section
-   ========================================== */
-.hero {
-    position: relative;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, var(--bg-beige) 0%, var(--bg-white) 100%);
-    overflow: hidden;
-    margin-top: 70px;
-}
-
-.hero-background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: 
-        radial-gradient(circle at 20% 50%, rgba(251, 186, 0, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 80% 80%, rgba(162, 7, 16, 0.1) 0%, transparent 50%);
-    pointer-events: none;
-}
-
-.hero-ornament {
-    position: absolute;
-    top: 10%;
-    right: 5%;
-    width: 300px;
-    height: 300px;
-    background: radial-gradient(circle, rgba(251, 186, 0, 0.2) 0%, transparent 70%);
-    border-radius: 50%;
-    filter: blur(80px);
-    animation: float 6s ease-in-out infinite;
-}
-
-@keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-30px); }
-}
-
-.hero-content {
-    position: relative;
-    z-index: 1;
-    text-align: center;
-    max-width: 800px;
-    padding: var(--spacing-md);
-    animation: fadeInUp 1s ease-out;
-}
-
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.hero-label {
-    display: inline-block;
-    font-size: 0.875rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: var(--primary);
-    margin-bottom: var(--spacing-sm);
-    animation: fadeInUp 1s ease-out 0.2s both;
-}
-
-.hero-title {
-    font-size: clamp(2.5rem, 6vw, 5rem);
-    color: var(--text-dark);
-    margin-bottom: var(--spacing-md);
-    line-height: 1.1;
-    animation: fadeInUp 1s ease-out 0.4s both;
-}
-
-.hero-description {
-    font-size: clamp(1rem, 2vw, 1.25rem);
-    color: var(--text-gray);
-    margin-bottom: var(--spacing-lg);
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-    animation: fadeInUp 1s ease-out 0.6s both;
-}
-
-.hero-content .btn-primary {
-    animation: fadeInUp 1s ease-out 0.8s both;
-}
-
-/* ==========================================
-   Product Range Section
-   ========================================== */
-.product-range {
-    background: var(--bg-white);
-}
-
-.product-carousel {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: var(--spacing-md);
-    margin-top: var(--spacing-lg);
-}
-
-.product-card {
-    background: var(--bg-white);
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    box-shadow: var(--shadow-sm);
-    transition: var(--transition);
-    display: flex;
-    flex-direction: column;
-}
-
-.product-card:hover {
-    transform: translateY(-8px);
-    box-shadow: var(--shadow-lg);
-}
-
-.product-image {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 1;
-    overflow: hidden;
-    background: var(--bg-beige);
-}
-
-.product-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: var(--transition);
-}
-
-.product-card:hover .product-image img {
-    transform: scale(1.05);
-}
-
-.product-badge {
-    position: absolute;
-    top: var(--spacing-sm);
-    right: var(--spacing-sm);
-    background: var(--primary);
-    color: var(--bg-white);
-    padding: 0.25rem 0.75rem;
-    border-radius: var(--radius-sm);
-    font-size: 0.75rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.product-info {
-    padding: var(--spacing-md);
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-xs);
-    flex: 1;
-}
-
-.product-title {
-    font-size: 1.5rem;
-    color: var(--text-dark);
-    margin-bottom: var(--spacing-xs);
-}
-
-.product-weight {
-    font-size: 0.875rem;
-    color: var(--text-light);
-    font-weight: 500;
-}
-
-.product-description {
-    font-size: 0.9rem;
-    color: var(--text-gray);
-    margin-bottom: var(--spacing-sm);
-    flex: 1;
-}
-
-.product-info .btn-secondary {
-    margin-top: auto;
-    width: 100%;
-}
-
-/* ==========================================
-   Recipe Section
-   ========================================== */
-.recipes-section {
-    background: var(--bg-beige);
-}
-
-.filter-buttons {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: var(--spacing-sm);
-    margin-bottom: var(--spacing-lg);
-}
-
-.filter-btn {
-    padding: 0.75rem 1.5rem;
-    background: var(--bg-white);
-    color: var(--text-dark);
-    border: 2px solid transparent;
-    border-radius: var(--radius-md);
-    font-family: var(--font-body);
-    font-size: 0.9rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: var(--transition);
-}
-
-.filter-btn:hover {
-    border-color: var(--primary);
-    color: var(--primary);
-}
-
-.filter-btn.active {
-    background: var(--primary);
-    color: var(--bg-white);
-    border-color: var(--primary);
-}
-
-.recipe-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: var(--spacing-md);
-}
-
-.recipe-card {
-    background: var(--bg-white);
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    box-shadow: var(--shadow-sm);
-    transition: var(--transition);
-    opacity: 1;
-    transform: scale(1);
-}
-
-.recipe-card.hidden {
-    display: none;
-}
-
-.recipe-card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-md);
-}
-
-.recipe-image {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 4/3;
-    overflow: hidden;
-}
-
-.recipe-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: var(--transition);
-}
-
-.recipe-card:hover .recipe-image img {
-    transform: scale(1.08);
-}
-
-.recipe-content {
-    padding: var(--spacing-md);
-}
-
-.recipe-category {
-    display: inline-block;
-    background: var(--secondary);
-    color: var(--text-dark);
-    padding: 0.25rem 0.75rem;
-    border-radius: var(--radius-sm);
-    font-size: 0.75rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: var(--spacing-sm);
-}
-
-.recipe-title {
-    font-size: 1.5rem;
-    color: var(--text-dark);
-    margin-bottom: var(--spacing-xs);
-}
-
-.recipe-description {
-    font-size: 0.9rem;
-    color: var(--text-gray);
-    margin-bottom: var(--spacing-sm);
-}
-
-.recipe-meta {
-    display: flex;
-    gap: var(--spacing-md);
-    font-size: 0.875rem;
-    color: var(--text-gray);
-}
-
-/* ==========================================
-   About Section
-   ========================================== */
-.about-section {
-    background: var(--bg-white);
-}
-
-.about-content {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--spacing-lg);
-    align-items: center;
-}
-
-.about-text p {
-    font-size: 1.125rem;
-    color: var(--text-gray);
-    margin-bottom: var(--spacing-md);
-    line-height: 1.8;
-}
-
-.about-stats {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: var(--spacing-md);
-    margin-top: var(--spacing-lg);
-}
-
-.stat {
-    text-align: center;
-    padding: var(--spacing-md);
-    background: var(--bg-beige);
-    border-radius: var(--radius-md);
-}
-
-.stat-number {
-    font-family: var(--font-display);
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: var(--primary);
-    margin-bottom: var(--spacing-xs);
-}
-
-.stat-label {
-    font-size: 0.9rem;
-    color: var(--text-gray);
-    font-weight: 500;
-}
-
-.about-image {
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    box-shadow: var(--shadow-md);
-}
-
-.about-image img {
-    width: 100%;
-    height: auto;
-    display: block;
-}
-
-/* ==========================================
-   Order Options Section
-   ========================================== */
-.order-section {
-    background: var(--bg-white);
-}
-
-.order-options {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: var(--spacing-md);
-    margin-bottom: var(--spacing-lg);
-}
-
-.order-card {
-    background: var(--bg-beige);
-    border-radius: var(--radius-lg);
-    padding: var(--spacing-lg);
-    text-align: center;
-    transition: var(--transition);
-    border: 2px solid transparent;
-}
-
-.order-card:hover {
-    transform: translateY(-8px);
-    box-shadow: var(--shadow-lg);
-    border-color: var(--primary);
-}
-
-.order-icon {
-    width: 80px;
-    height: 80px;
-    margin: 0 auto var(--spacing-md);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: var(--transition);
-}
-
-.whatsapp-icon {
-    background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
-    color: var(--bg-white);
-}
-
-.instagram-icon {
-    background: linear-gradient(135deg, #833AB4 0%, #FD1D1D 50%, #FCAF45 100%);
-    color: var(--bg-white);
-}
-
-.email-icon {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--accent-brown) 100%);
-    color: var(--bg-white);
-}
-
-.order-card:hover .order-icon {
-    transform: scale(1.1) rotate(5deg);
-}
-
-.order-title {
-    font-size: 1.75rem;
-    color: var(--text-dark);
-    margin-bottom: var(--spacing-sm);
-}
-
-.order-description {
-    font-size: 1rem;
-    color: var(--text-gray);
-    margin-bottom: var(--spacing-md);
-    line-height: 1.6;
-}
-
-.order-card .btn-primary {
-    width: 100%;
-    margin-top: auto;
-}
-
-.contact-info {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: var(--spacing-md);
-    margin-top: var(--spacing-lg);
-    padding: var(--spacing-lg);
-    background: var(--bg-beige);
-    border-radius: var(--radius-lg);
-}
-
-.contact-item {
-    display: flex;
-    align-items: flex-start;
-    gap: var(--spacing-sm);
-}
-
-.contact-item svg {
-    flex-shrink: 0;
-    color: var(--primary);
-    margin-top: 2px;
-}
-
-.contact-item div {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-}
-
-.contact-item strong {
-    color: var(--text-dark);
-    font-weight: 600;
-}
-
-.contact-item a {
-    color: var(--primary);
-    text-decoration: none;
-    transition: var(--transition);
-}
-
-.contact-item a:hover {
-    color: var(--accent-brown);
-    text-decoration: underline;
-}
-
-.contact-item span {
-    color: var(--text-gray);
-}
-
-/* ==========================================
-   Footer
-   ========================================== */
-.footer {
-    background: linear-gradient(135deg, var(--accent-brown) 0%, var(--primary) 100%);
-    color: var(--bg-white);
-    padding: var(--spacing-xl) 0 var(--spacing-md);
-}
-
-.footer-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: var(--spacing-lg);
-    margin-bottom: var(--spacing-lg);
-}
-
-.footer-logo {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-family: var(--font-display);
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--bg-white);
-    margin-bottom: var(--spacing-sm);
-}
-
-.footer-logo .logo-text span {
-    color: var(--secondary);
-}
-
-.footer-description {
-    font-size: 0.9rem;
-    line-height: 1.6;
-    margin-bottom: var(--spacing-md);
-    opacity: 0.9;
-}
-
-.social-links {
-    display: flex;
-    gap: var(--spacing-sm);
-}
-
-.social-links a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 50%;
-    color: var(--bg-white);
-    transition: var(--transition);
-}
-
-.social-links a:hover {
-    background: var(--secondary);
-    color: var(--text-dark);
-    transform: translateY(-3px);
-}
-
-.footer-title {
-    font-size: 1.25rem;
-    font-weight: 600;
-    margin-bottom: var(--spacing-md);
-    color: var(--bg-white);
-}
-
-.footer-links {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-xs);
-}
-
-.footer-links a {
-    color: rgba(255, 255, 255, 0.8);
-    text-decoration: none;
-    font-size: 0.9rem;
-    transition: var(--transition);
-}
-
-.footer-links a:hover {
-    color: var(--secondary);
-    padding-left: 5px;
-}
-
-.newsletter-text {
-    font-size: 0.9rem;
-    line-height: 1.6;
-    margin-bottom: var(--spacing-md);
-    opacity: 0.9;
-}
-
-.newsletter-form {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-sm);
-}
-
-.newsletter-form input {
-    padding: 0.875rem;
-    border: none;
-    border-radius: var(--radius-md);
-    font-family: var(--font-body);
-    font-size: 0.9rem;
-    outline: none;
-}
-
-.newsletter-form .btn-primary {
-    width: 100%;
-}
-
-.footer-bottom {
-    text-align: center;
-    padding-top: var(--spacing-md);
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    font-size: 0.875rem;
-    opacity: 0.8;
-}
-
-/* ==========================================
-   Responsive Design - Tablet
-   ========================================== */
-@media (min-width: 768px) {
-    .nav-desktop {
-        display: flex;
-    }
-    
-    .search-bar {
-        display: flex;
-    }
-    
-    .mobile-toggle {
-        display: none;
-    }
-    
-    .nav-mobile {
-        display: none !important;
-    }
-    
-    .hero {
-        margin-top: 80px;
-    }
-    
-    .about-content {
-        grid-template-columns: 1fr 1fr;
-    }
-    
-    .newsletter-form {
-        flex-direction: row;
-    }
-    
-    .newsletter-form input {
-        flex: 1;
-    }
-    
-    .newsletter-form .btn-primary {
-        width: auto;
-    }
-}
-
-/* ==========================================
-   Responsive Design - Desktop
-   ========================================== */
-@media (min-width: 1024px) {
-    .container {
-        padding: 0 var(--spacing-md);
-    }
-    
-    .product-carousel {
-        grid-template-columns: repeat(3, 1fr);
-    }
-    
-    .recipe-grid {
-        grid-template-columns: repeat(4, 1fr);
-    }
-}
-
-/* ==========================================
-   Animation Classes
-   ========================================== */
-.fade-in {
-    animation: fadeIn 0.6s ease-out;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-.slide-in-left {
-    animation: slideInLeft 0.6s ease-out;
-}
-
-@keyframes slideInLeft {
-    from {
-        opacity: 0;
-        transform: translateX(-30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
 
-/* ==========================================
-   Smooth Scroll Padding
-   ========================================== */
-section {
-    scroll-margin-top: 100px;
+// Debounce function for performance optimization
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
+// Throttle function for scroll events
+function throttle(func, limit) {
+    let inThrottle;
+    return function() {
+        const args = arguments;
+        const context = this;
+        if (!inThrottle) {
+            func.apply(context, args);
+            inThrottle = true;
+            setTimeout(() => inThrottle = false, limit);
+        }
+    };
 }
